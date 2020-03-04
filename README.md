@@ -1,6 +1,8 @@
 # README #
 
-This repository consists of an install and uninstall script, a systemd unit and a file containing common variables.
+This repository consists of an install and uninstall script, 
+a systemd unit and a file containing common variables.
+
 Just clone it and run `install.sh` AFTER configuring rclone.
 
 The install script will:
