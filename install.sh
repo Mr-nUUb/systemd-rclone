@@ -6,6 +6,7 @@ echo "This script will set up a directory structure"
 echo "and systemd units based on your rclone config."
 echo "Please run rclone first and set up your remotes."
 read -p "Please press ENTER to continue or CTRL-C to cancel"
+echo
 
 echo "Installing systemd unit..."
 __systemd_unit_temp="/tmp/${__systemd_unit_name}@.${__systemd_unit_type}"
@@ -16,6 +17,7 @@ sed "s|\$__mount_target_root|${__mount_target_root}|g" \
 cp -r "${__systemd_unit_temp}" ${__systemd_unit_dest}
 rm -f ${__systemd_unit_temp}
 systemctl --user daemon-reload
+echo
 
 mkdir -p ${__mount_target_root}
 while read -r __line; do
