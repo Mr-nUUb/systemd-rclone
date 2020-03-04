@@ -1,5 +1,5 @@
 [Unit]
-Description=Mount OneDrive and Sharepoint with rclone - "%I"
+Description=Mount rclone remotes - "%I"
 After=network-online.target
 
 [Service]
@@ -7,8 +7,8 @@ Type=notify
 ExecStart=/usr/bin/rclone mount \
     --verbose \
     --vfs-cache-mode writes \
-    "%I:" "%h/OneDrive/%I"
-ExecStop=/bin/fusermount -uz "%h/OneDrive/%I"
+    "%I:" "$__mount_target_root/%I"
+ExecStop=/bin/fusermount -uz "$__mount_target_root/%I"
 Restart=on-abort
 RestartSec=5
 StartLimitInterval=60s
