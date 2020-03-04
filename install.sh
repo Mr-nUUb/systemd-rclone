@@ -10,10 +10,10 @@ echo
 
 echo "Installing systemd unit..."
 __systemd_unit_temp="/tmp/${__systemd_unit_name}@.${__systemd_unit_type}"
-mkdir -p ${__systemd_unit_dest}
 sed "s|\$__mount_target_root|${__mount_target_root}|g" \
     "${__systemd_unig_src}/${__systemd_unit_name}@.${__systemd_unit_type}" \
     > "${__systemd_unit_temp}"
+mkdir -p ${__systemd_unit_dest}
 cp -r "${__systemd_unit_temp}" ${__systemd_unit_dest}
 rm -f ${__systemd_unit_temp}
 systemctl --user daemon-reload

@@ -1,29 +1,13 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository consists of an install and uninstall script, a systemd unit and a file containing common variables.
+Just clone it and run `install.sh` AFTER configuring rclone.
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+The install script will:
+* patch the systemd unit based on the variable `__mount_target_root` in `settings.sh`
+* install the systemd unit
+* create directory specified in `__mount_target_root`
+* parse the rclone config
+* create a directory named after every rclone remote in `__mount_target_root`
+* enable an instance of the systemd unit for every remote
+* start the aforementioned instance
