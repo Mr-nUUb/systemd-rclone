@@ -14,7 +14,7 @@ __systemd_unit_temp="/tmp/${__systemd_unit_name}@.${__systemd_unit_type}"
 sed "s|\$__target_directory|${__target_directory}|g; s|\$__rclone_options|${__rclone_options}|g" \
     "${__systemd_unig_src}/${__systemd_unit_name}@.${__systemd_unit_type}" \
     > "${__systemd_unit_temp}"
-mkdir -p ${__systemd_unit_dest} 2>/dev/null
+[[ -d ${__systemd_unit_dest} ]] || mkdir -p ${__systemd_unit_dest}
 cp -r "${__systemd_unit_temp}" ${__systemd_unit_dest}
 rm -f ${__systemd_unit_temp}
 systemctl --user daemon-reload
