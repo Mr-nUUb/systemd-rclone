@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __target_directory="${HOME}/rclone"
-__rclone_options="--verbose --vfs-cache-mode full"
+__rclone_options="--verbose --vfs-cache-mode writes"
 
 # These variables should not be changed
 __rclone_config="${HOME}/.config/rclone/rclone.conf"
