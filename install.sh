@@ -9,17 +9,18 @@ read -p "Please press ENTER to continue or CTRL-C to cancel"
 echo
 
 echo "Installing systemd unit..."
+__systemd_unig_src="./systemd/user"
 __systemd_unit_temp="/tmp/${__systemd_unit_name}@.${__systemd_unit_type}"
-sed "s|\$__mount_target_root|${__mount_target_root}|g" \
+sed "s|\$__target_directory|${__target_directory}|g; s|\$__rclone_options|${__rclone_options}|g" \
     "${__systemd_unig_src}/${__systemd_unit_name}@.${__systemd_unit_type}" \
     > "${__systemd_unit_temp}"
-mkdir -p ${__systemd_unit_dest}
+mkdir -p ${__systemd_unit_dest} 2>/dev/null
 cp -r "${__systemd_unit_temp}" ${__systemd_unit_dest}
 rm -f ${__systemd_unit_temp}
 systemctl --user daemon-reload
 echo
 
-mkdir -p ${__mount_target_root}
+mkdir -p ${__target_directory}
 while read -r __line; do
     if [[ $__line =~ $__regex ]]; then
         echo "Processing remote \"${BASH_REMATCH[1]}\"..."
@@ -27,7 +28,7 @@ while read -r __line; do
         __systemd_unit_full="${__systemd_unit_name}@${__instance}.${__systemd_unit_type}"
 
         echo "Creating mount point..."
-        mkdir "${__mount_target_root}/${BASH_REMATCH[1]}"
+        mkdir "${__target_directory}/${BASH_REMATCH[1]}"
 
         echo "Enabling and starting unit..."
         systemctl --user enable "${__systemd_unit_full}"

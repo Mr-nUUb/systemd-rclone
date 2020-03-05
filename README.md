@@ -5,12 +5,14 @@ a systemd unit and a file containing common variables.
 
 Just clone it and run `install.sh` AFTER configuring rclone.
 
+Mount options and target directory can be customized in `settings.sh`.
+
 The install script will:
 
-* patch the systemd unit based on the variable `__mount_target_root` in `settings.sh`
-* install the systemd unit
-* create directory specified in `__mount_target_root`
-* parse the rclone config
-* create a directory named after every rclone remote in `__mount_target_root`
-* enable an instance of the systemd unit for every remote
-* start the aforementioned instance
+* patch systemd unit
+* install systemd unit
+* create target directory
+* parse rclone config
+* create directory named after every rclone remote
+* enable instances of the systemd unit for every remote
+* start aforementioned instances

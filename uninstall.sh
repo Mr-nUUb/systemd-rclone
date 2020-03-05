@@ -17,12 +17,12 @@ while read -r __line; do
         systemctl --user disable "${__systemd_unit_full}"
 
         echo "Deleting mount point..."
-        rmdir "${__mount_target_root}/${BASH_REMATCH[1]}"
+        rmdir "${__target_directory}/${BASH_REMATCH[1]}"
 
         echo
     fi
 done < $__rclone_config
-rmdir ${__mount_target_root}
+rmdir ${__target_directory}
 
 echo "Removing systemd unit..."
 rm -f "${__systemd_unit_dest}/${__systemd_unit_name}@.${__systemd_unit_type}"
